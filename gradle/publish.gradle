@@ -1,31 +1,39 @@
-	publishing {
-		publications {
-			mavenJava(MavenPublication) {
-				from components.java
-				artifact sourcesJar {
-				classifier 'sources'
-				}
-				artifact javadocJar {
-				classifier 'javadoc'
-				}
-				pom.withXml {
-					asNode().children().last() + {
-						resolveStrategy = Closure.DELEGATE_FIRST
-						name project.name
-						description project.description
-					inceptionYear '2020'
-						licenses {
-							license {
-							name 'The Apache Software License, Version 2.0'
-							url 'http://www.apache.org/license/LICENSE-2.0.txt'
-							distribution 'repo'
-							}
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+		versionMapping {
+			usage('java-api') {
+				fromResolutionOf('runtimeClasspath')
+			}
+			usage('java-runtime') {
+				fromResolutionResult()
+			}
+		}
+			from components.java
+			artifact sourcesJar {
+			classifier 'sources'
+			}
+			artifact javadocJar {
+			classifier 'javadoc'
+			}
+			pom.withXml {
+				asNode().children().last() + {
+					resolveStrategy = Closure.DELEGATE_FIRST
+					name project.name
+					description project.description
+				inceptionYear '2020'
+					licenses {
+						license {
+						name 'The Apache Software License, Version 2.0'
+						url 'http://www.apache.org/license/LICENSE-2.0.txt'
+						distribution 'repo'
 						}
 					}
 				}
 			}
 		}
 	}
+}
 
 if (System.env.BINTRAY_USER && System.env.BINTRAY_KEY) {
 	bintray {

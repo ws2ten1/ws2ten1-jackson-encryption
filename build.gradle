@@ -87,8 +87,8 @@ tasks.withType(com.github.spotbugs.SpotBugsTask) {
 	reports {
 		html.enabled = true
 		xml.enabled = false
-		}
-		}
+	}
+}
 
 tasks.withType(Test) {
 	exclude "**/*\$*", "**/*Tests.class", "**/examples/**"
@@ -99,7 +99,7 @@ tasks.withType(Test) {
 	testLogging.exceptionFormat = 'full'
 	beforeTest {
 		logger.lifecycle("{} > {}", it.parent.name, it.name)
-}
+	}
 }
 
 // ================
