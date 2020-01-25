@@ -13,19 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ws2ten1.jackson.encryption;
-
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+package org.polycreo.jackson.encryption;
 
 /**
- * TODO miyamoto.daisuke.
+ * Service interface for symmetric encryption of text strings.
  */
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface EncryptedField {
+public interface TextEncryptor {
+	
+	/**
+	 * Encrypt the raw text string.
+	 */
+	String encrypt(String text);
+	
+	/**
+	 * Decrypt the encrypted text string.
+	 */
+	String decrypt(String encryptedText);
+	
 }

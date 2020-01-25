@@ -13,28 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ws2ten1.jackson.encryption;
+package org.polycreo.jackson.encryption;
 
-import java.io.IOException;
-
-import lombok.RequiredArgsConstructor;
-
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * TODO miyamoto.daisuke.
  */
-@RequiredArgsConstructor
-class DecryptingJsonSerializer extends JsonSerializer<Object> {
-	
-	private final TextEncryptor encryptor;
-	
-	
-	@Override
-	public void serialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-		String decrypted = encryptor.decrypt(value.toString());
-		gen.writeRawValue(decrypted);
-	}
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface EncryptedField {
 }

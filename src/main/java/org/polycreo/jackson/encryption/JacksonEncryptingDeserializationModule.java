@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ws2ten1.jackson.encryption;
+package org.polycreo.jackson.encryption;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -25,7 +25,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 public class JacksonEncryptingDeserializationModule extends SimpleModule {
 	
 	private static final Version VERSION =
-			new Version(1, 0, 0, null, "org.ws2ten1", "ws2ten1-jackson-encryption");
+			new Version(1, 0, 0, null, "org.polycreo", "polycreo-jackson-encryption");
 	
 	
 	/**

@@ -13,21 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ws2ten1.jackson.encryption;
+package org.polycreo.jackson.encryption;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 /**
- * Service interface for symmetric encryption of text strings.
+ * This is for testing only!  This is not encryptor!
  */
-public interface TextEncryptor {
+public class ExampleTextEncryptor implements TextEncryptor {
 	
-	/**
-	 * Encrypt the raw text string.
-	 */
-	String encrypt(String text);
+	@Override
+	public String encrypt(String text) {
+		return Base64.getEncoder().encodeToString(text.getBytes(StandardCharsets.UTF_8));
+	}
 	
-	/**
-	 * Decrypt the encrypted text string.
-	 */
-	String decrypt(String encryptedText);
-	
+	@Override
+	public String decrypt(String encryptedText) {
+		return new String(Base64.getDecoder().decode(encryptedText), StandardCharsets.UTF_8);
+	}
 }

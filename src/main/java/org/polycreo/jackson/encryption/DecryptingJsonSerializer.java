@@ -13,23 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ws2ten1.jackson.encryption;
+package org.polycreo.jackson.encryption;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
+import java.io.IOException;
+
+import lombok.RequiredArgsConstructor;
+
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 
 /**
- * This is for testing only!  This is not encryptor!
+ * TODO miyamoto.daisuke.
  */
-public class ExampleTextEncryptor implements TextEncryptor {
+@RequiredArgsConstructor
+class DecryptingJsonSerializer extends JsonSerializer<Object> {
+	
+	private final TextEncryptor encryptor;
+	
 	
 	@Override
-	public String encrypt(String text) {
-		return Base64.getEncoder().encodeToString(text.getBytes(StandardCharsets.UTF_8));
-	}
-	
-	@Override
-	public String decrypt(String encryptedText) {
-		return new String(Base64.getDecoder().decode(encryptedText), StandardCharsets.UTF_8);
+	public void serialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+		String decrypted = encryptor.decrypt(value.toString());
+		gen.writeRawValue(decrypted);
 	}
 }
